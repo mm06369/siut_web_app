@@ -3,6 +3,8 @@ import 'package:siut_web_app/components/password_field.dart';
 import 'package:siut_web_app/home_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -51,36 +53,42 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a username';
-                          }
-                          return null; // Return null if the input is valid
-                        },
-                        controller: _usernameController,
-                        style: const TextStyle(
-                            color: Color(0xFFF5FCCD), fontFamily: 'Poppins'),
-                        decoration: const InputDecoration(
-                          errorStyle: TextStyle(
-                            color: Colors
-                                .red, // Customize the error message text color
-                            fontSize:
-                                14.0, // Customize the error message text size
-                                fontFamily: 'Poppins'
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFF419197), // Background color
-                          hintText: 'Username', // Hint text
-                          hintStyle: TextStyle(
-                              color: Color(0xFFF5FCCD),
-                              fontFamily: 'Poppins'), // Hint text color
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none, // No border
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(8.0)), // Border radius
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SizedBox(
+                        width: 300,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a username';
+                            }
+                            return null; // Return null if the input is valid
+                          },
+                          controller: _usernameController,
+                          style: const TextStyle(
+                              color: Color(0xFFF5FCCD), fontFamily: 'Poppins'),
+                          decoration: const InputDecoration(
+                            errorStyle: TextStyle(
+                              color: Colors
+                                  .red, // Customize the error message text color
+                              fontSize:
+                                  14.0, // Customize the error message text size
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold
+                            ),
+                            filled: true,
+                            fillColor: Color(0xFF419197), // Background color
+                            hintText: 'Username', // Hint text
+                            hintStyle: TextStyle(
+                                color: Color(0xFFF5FCCD),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold
+                                ), // Hint text color
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none, // No border
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(8.0)), // Border radius
+                            ),
                           ),
                         ),
                       ),
@@ -88,56 +96,61 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(
-                        width: 300,
-                        child: PasswordField(
-                          controller: _passwordController,
-                        )),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SizedBox(
+                          width: 300,
+                          child: PasswordField(
+                            controller: _passwordController,
+                          )),
+                    ),
                   ],
                 )),
             const SizedBox(
               height: 30,
             ),
-            SizedBox(
-              width: 300.0, // Width of the button
-              height: 50.0, // Height of the button
-              child: ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    // Form is valid, perform your action here
-                    // Typically, this is where you'd submit the form data
-                    setState(() {
-                      _isVerifying = true;
-                    });
-                    await Future.delayed(const Duration(milliseconds: 1000));
-                    setState(() {
-                      _isVerifying = false;
-                    });
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
-                  } else {
-                    // Form is not valid
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please fill in all fields.'),
-                      ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFF5FCCD), // Background color
-                  onPrimary: const Color(0xFF12486B), // Text color
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8.0), // Button border radius
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SizedBox(
+                width: 300.0, // Width of the button
+                height: 50.0, // Height of the button
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      // Form is valid, perform your action here
+                      // Typically, this is where you'd submit the form data
+                      setState(() {
+                        _isVerifying = true;
+                      });
+                      await Future.delayed(const Duration(milliseconds: 1000));
+                      setState(() {
+                        _isVerifying = false;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const HomePage()));
+                    } else {
+                      // Form is not valid
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please fill in all fields.'),
+                        ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: const Color(0xFF12486B), backgroundColor: const Color(0xFFF5FCCD), // Text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(8.0), // Button border radius
+                    ),
                   ),
+                  child: !_isVerifying ? const Text(
+                    'Sign In', // Button text
+                    style: TextStyle(
+                        fontSize: 18.0, // Text size
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600),
+                  ): const CircularProgressIndicator(color: Color(0xFF12486B),),
                 ),
-                child: !_isVerifying ? const Text(
-                  'Sign In', // Button text
-                  style: TextStyle(
-                      fontSize: 18.0, // Text size
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600),
-                ): CircularProgressIndicator(color: Color(0xFF12486B),),
               ),
             )
           ],

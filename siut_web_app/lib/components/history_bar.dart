@@ -28,11 +28,12 @@ class HistoryBar extends StatelessWidget {
               ),
               const SizedBox(width: 8.0),
               SizedBox(
-                width: 140,
+                width: 120,
                 child: Text(
                   text, // Text
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: Colors.white, // Text color
                       fontSize: 14.0,
                       fontFamily: 'Poppins'),

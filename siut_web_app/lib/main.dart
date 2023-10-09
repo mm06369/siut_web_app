@@ -16,16 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'SIUT ChatBot',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const HomePage()
       home: AnimatedSplashScreen(
             duration: 3000,
             splash: Image.asset('assets/siut_logo.jpg'),
-            nextScreen: LoginPage(),
+            nextScreen: const LoginPage(),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white)
     );

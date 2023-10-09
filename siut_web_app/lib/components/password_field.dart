@@ -34,13 +34,16 @@ class _PasswordFieldState extends State<PasswordField> {
         errorStyle: const TextStyle(
             color: Colors.red, // Customize the error message text color
             fontSize: 14.0, // Customize the error message text size
-            fontFamily: 'Poppins'),
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold
+            ),
         filled: true,
         fillColor: const Color(0xFF419197), // Background color
         hintText: 'Password', // Hint text
         hintStyle: const TextStyle(
           color: Color(0xFFF5FCCD),
           fontFamily: 'Poppins',
+          fontWeight: FontWeight.bold
         ), // Hint text color
         border: const OutlineInputBorder(
           borderSide: BorderSide.none, // No border
